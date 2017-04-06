@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.hzh.entity.Book;
+import com.hzh.entity.User;
 
 /**
  * 配置spring和junit整合，junit启动时加载springIOC容器 spring-test,junit
@@ -14,14 +14,13 @@ import com.hzh.entity.Book;
 @RunWith(SpringJUnit4ClassRunner.class)
 // 告诉junit spring配置文件
 @ContextConfiguration({ "classpath:spring/spring-dao.xml", "classpath:spring/spring-service.xml" })
-public class BookDaoTest{
+public class UserDaoTest {
 	@Autowired
-	private BookDao bookDao;
-
+	private UserDao userDao;
+	
 	@Test
-	public void TestqueryById() throws Exception {
-		long bookId = 1000;
-		Book book = bookDao.queryById(bookId);
-		System.out.println(book);
+	public void testInsertUser() {
+		User user=new User("ddh", "123",13534886987L);
+		userDao.insertUser(user);
 	}
 }

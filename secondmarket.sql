@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2017-04-06 16:39:45
+Date: 2017-04-06 18:46:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -97,7 +97,7 @@ CREATE TABLE `user` (
   `username` varchar(32) NOT NULL,
   `password` varchar(32) NOT NULL,
   `phone` bigint(32) NOT NULL,
-  `short_number` int(12) DEFAULT NULL,
+  `short_num` int(12) DEFAULT NULL,
   `wechat` varchar(32) DEFAULT NULL,
   `head_img` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`username`)

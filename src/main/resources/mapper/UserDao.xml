@@ -2,17 +2,10 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hzh.dao.BookDao">
+<mapper namespace="com.hzh.dao.UserDao">
     <!-- 目的：为dao接口方法提供sql语句配置 -->
-    <select id="queryById" resultType="Book" parameterType="long">
+    <select id="insertUser" resultType="boolean" parameterType="User">
         <!-- 具体的sql -->
-        SELECT
-            book_id,
-            name,
-            number
-        FROM
-            book
-        WHERE
-            book_id = #{bookId}
+        INSERT into user(username,password,phone) VALUES(#{username},#{password},#{phone})
     </select>
 </mapper>
