@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hzh.entity.User;
 import com.hzh.service.UserService;
 
+
 @Controller
 @RequestMapping("/user")
 public class UserController {

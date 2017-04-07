@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2017-04-06 18:46:37
+Date: 2017-04-07 16:46:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -38,6 +38,7 @@ CREATE TABLE `goods` (
   `goods_id` int(12) NOT NULL AUTO_INCREMENT,
   `source_type` varchar(32) NOT NULL COMMENT '来源类型',
   `goods_name` varchar(50) NOT NULL,
+  `publisher` varchar(32) NOT NULL COMMENT '发布者',
   `description` varchar(250) DEFAULT NULL,
   `type` varchar(32) DEFAULT NULL,
   `popularity` int(12) DEFAULT '0' COMMENT '人气值，即收藏数',
@@ -61,8 +62,8 @@ DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `order_id` int(12) NOT NULL AUTO_INCREMENT,
   `goods_id` int(12) NOT NULL,
-  `publisher` varchar(50) DEFAULT NULL COMMENT '商品信息发布者',
-  `order_people` varchar(50) DEFAULT NULL COMMENT '下单人',
+  `publisher` varchar(32) DEFAULT NULL COMMENT '商品信息发布者',
+  `order_people` varchar(32) DEFAULT NULL COMMENT '下单人',
   `final_price` double(12,0) DEFAULT NULL,
   `order_time` varchar(50) DEFAULT NULL,
   `order_status` varchar(50) DEFAULT '进行中',
@@ -106,3 +107,6 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES ('hzh', '123', '13534886987', null, null, null);
+INSERT INTO `user` VALUES ('ldh', '123', '13534886987', null, null, null);
+INSERT INTO `user` VALUES ('黄大爷', '123', '13034480210', '734054', '498641239', 'test.png');
