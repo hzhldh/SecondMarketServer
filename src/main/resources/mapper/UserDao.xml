@@ -3,9 +3,33 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hzh.dao.UserDao">
-    <!-- 目的：为dao接口方法提供sql语句配置 -->
-    <select id="insertUser" resultType="boolean" parameterType="User">
-        <!-- 具体的sql -->
+    <!-- 新增用户 -->
+    <insert id="insertUser" parameterType="User">
         INSERT into user(username,password,phone) VALUES(#{username},#{password},#{phone})
+    </insert>
+    
+    <!--  完善个人信息 -->
+    <update id="updateUser" parameterType="User">
+        UPDATE user set short_num=#{short_num},wechat=#{wechat},head_img=#{head_img} where username=#{username}
+    </update>
+    
+   <!--  查询全部用户信息 -->
+    <select id="QueryAllUser" resultType="User">
+        select username,password,phone,short_num,wechat,head_img from user;
+    </select>
+    
+    <!--  查询用户名是否存在 -->
+    <select id="selectUsernameCount" resultType="int">
+        select count(1) from user where username=#{username};
+    </select>
+    
+   <!--  验证用户登录 -->
+   <select id="login" resultType="User">
+        select username,password,phone,short_num,wechat,head_img from user where username=#{username} and password=#{password};
+    </select>
+    
+    <!--  根据用户名查询全部信息-->
+   <select id="selectUserByName" resultType="User">
+        select username,password,phone,short_num,wechat,head_img from user where username=#{username};
     </select>
 </mapper>

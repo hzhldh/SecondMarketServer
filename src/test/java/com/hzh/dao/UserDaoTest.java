@@ -20,7 +20,7 @@ public class UserDaoTest {
 	
 	@Test
 	public void testInsertUser() {
-		User user=new User("ddh", "123",13534886987L);
-		userDao.insertUser(user);
+		User user=new User("hzh", "123",13534886987L);
+		System.out.println(userDao.insertUser(user));
 	}
 }
