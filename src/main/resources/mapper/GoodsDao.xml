@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzh.dao.GoodsDao">
+    <resultMap id="Goods" type="com.hzh.entity.Goods" >
+	    <result column="goods_id" property="goods_id" jdbcType="INTEGER" />
+	    <result column="source_type" property="source_type" jdbcType="VARCHAR" />
+	    <result column="goods_name" property="goods_name" jdbcType="VARCHAR" />
+	    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
+	    <result column="description" property="description" jdbcType="VARCHAR" />
+	    <result column="type" property="type" jdbcType="VARCHAR" />
+	    <result column="popularity" property="popularity" jdbcType="INTEGER" />
+	    <result column="auction_num" property="auction_num" jdbcType="INTEGER" />
+	    <result column="goods_img" property="goods_img" jdbcType="VARCHAR" />
+	    <result column="original_price" property="original_price" jdbcType="DOUBLE" />
+	    <result column="second_price" property="second_price" jdbcType="DOUBLE" />
+	    <result column="old_degree" property="old_degree" jdbcType="VARCHAR" />
+	    <result column="goods_status" property="goods_status" jdbcType="VARCHAR" />
+    </resultMap>
+  
+    <!--发布商品信息 -->
+    <insert id="AddGoods" parameterType="Goods">
+        INSERT into goods(source_type,goods_name,publisher,description,type,goods_img,original_price,second_price,old_degree) VALUES(#{source_type},#{goods_name},#{publisher},#{description},#{type},#{goods_img},#{original_price},#{second_price},#{old_degree})
+    </insert>
+    
+    <!-- 删除发布的物品 -->
+    <delete id="DelGoods">
+        delete from goods where goods_id=#{goods_id}
+    </delete>
+    
+    <!-- 显示自己发布的物品信息 -->
+    <select id="selectGoodsByName" resultMap="Goods">
+        select goods_id,source_type,goods_name,publisher,description,type,popularity,auction_num,goods_img,original_price,second_price,old_degree,goods_status from goods where publisher=#{username};
+    </select>
+    
+    <!-- 显示全部有效物品信息 -->
+    <select id="selectValidGoods" resultMap="Goods">
+        select goods_id,source_type,goods_name,publisher,description,type,popularity,auction_num,goods_img,original_price,second_price,old_degree,goods_status from goods where goods_status='有效';
+    </select>
+    
+    <!-- 根据物品编号查询全部信息 -->
+    <select id="selectGoodsById" resultMap="Goods">
+        select goods_id,source_type,goods_name,publisher,description,type,popularity,auction_num,goods_img,original_price,second_price,old_degree,goods_status from goods where goods_id=#{goods_id};
+    </select>
+    
+    <!-- 修改发布的物品信息(物品名称，描述，类型，图片，原价，二手价，新旧程度) -->
+    <update id="UpdateGoods">
+        update goods set goods_name=#{goods_name},description=#{description},type=#{type},goods_img=#{goods_img},original_price=#{original_price},second_price=#{second_price},old_degree=#{old_degree} where goods_id=#{goods_id};
+    </update>
+    
+    
+       
+</mapper>

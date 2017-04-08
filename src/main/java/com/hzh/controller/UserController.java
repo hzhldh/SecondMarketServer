@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;		
 
@@ -57,7 +56,7 @@ public class UserController {
 		user.setShort_num(short_num);
 		user.setWechat(wechat);
 		user.setHead_img(head_img);
-		if (userService.updateUser(user)==true) {
+		if (userService.updateUser(user)) {
 			return "修改个人信息成功";
 		}else {
 			return "修改失败";
