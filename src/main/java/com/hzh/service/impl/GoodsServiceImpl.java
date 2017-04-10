@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hzh.dao.GoodsDao;
 import com.hzh.entity.Goods;
+import com.hzh.entity.GoodsAndUser;
 import com.hzh.service.GoodsService;
 
 @Service
@@ -43,9 +44,14 @@ public class GoodsServiceImpl implements GoodsService{
 		return goodsDao.selectValidGoods();
 	}
 
-	//根据物品编号查询全部信息
+	//根据物品编号获取Goods属性
 	public Goods selectGoodsById(int goods_id) {
 		return goodsDao.selectGoodsById(goods_id);
+	}
+
+	//查看物品详情信息-联表
+	public List<GoodsAndUser> selectGoodsDetails(int goods_id) {
+		return goodsDao.selectGoodsDetails(goods_id);
 	}
 
 }

@@ -18,6 +18,27 @@
 	    <result column="old_degree" property="old_degree" jdbcType="VARCHAR" />
 	    <result column="goods_status" property="goods_status" jdbcType="VARCHAR" />
     </resultMap>
+    
+     <resultMap id="GoodsAndUser" type="com.hzh.entity.GoodsAndUser" >
+	    <result column="goods_id" property="goods_id" jdbcType="INTEGER" />
+	    <result column="source_type" property="source_type" jdbcType="VARCHAR" />
+	    <result column="goods_name" property="goods_name" jdbcType="VARCHAR" />
+	    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
+	    <result column="description" property="description" jdbcType="VARCHAR" />
+	    <result column="type" property="type" jdbcType="VARCHAR" />
+	    <result column="popularity" property="popularity" jdbcType="INTEGER" />
+	    <result column="auction_num" property="auction_num" jdbcType="INTEGER" />
+	    <result column="goods_img" property="goods_img" jdbcType="VARCHAR" />
+	    <result column="original_price" property="original_price" jdbcType="DOUBLE" />
+	    <result column="second_price" property="second_price" jdbcType="DOUBLE" />
+	    <result column="old_degree" property="old_degree" jdbcType="VARCHAR" />
+	    <result column="goods_status" property="goods_status" jdbcType="VARCHAR" />
+	    <result column="username" property="username" jdbcType="VARCHAR" />
+	    <result column="phone" property="phone" jdbcType="BIGINT" />
+	    <result column="short_num" property="short_num" jdbcType="INTEGER" />
+	    <result column="wechat" property="wechat" jdbcType="VARCHAR" />
+	    <result column="head_img" property="head_img" jdbcType="VARCHAR" />
+    </resultMap>
   
     <!--发布商品信息 -->
     <insert id="AddGoods" parameterType="Goods">
@@ -39,7 +60,7 @@
         select goods_id,source_type,goods_name,publisher,description,type,popularity,auction_num,goods_img,original_price,second_price,old_degree,goods_status from goods where goods_status='有效';
     </select>
     
-    <!-- 根据物品编号查询全部信息 -->
+    <!-- 根据物品编号获取Goods属性-->
     <select id="selectGoodsById" resultMap="Goods">
         select goods_id,source_type,goods_name,publisher,description,type,popularity,auction_num,goods_img,original_price,second_price,old_degree,goods_status from goods where goods_id=#{goods_id};
     </select>
@@ -49,6 +70,9 @@
         update goods set goods_name=#{goods_name},description=#{description},type=#{type},goods_img=#{goods_img},original_price=#{original_price},second_price=#{second_price},old_degree=#{old_degree} where goods_id=#{goods_id};
     </update>
     
-    
-       
+    <!-- 查看物品详情信息-联表 -->
+    <select id="selectGoodsDetails" resultMap="GoodsAndUser">
+        select goods_id,source_type,goods_name,publisher,description,type,popularity,auction_num,goods_img,original_price,second_price,old_degree,goods_status,username,phone,short_num,wechat,head_img from goods g,user u where g.publisher=u.username and goods_id=#{goods_id};
+    </select>
+  
 </mapper>

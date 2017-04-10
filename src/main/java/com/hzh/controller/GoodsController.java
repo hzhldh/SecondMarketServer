@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hzh.entity.Goods;
+import com.hzh.entity.GoodsAndUser;
 import com.hzh.service.GoodsService;
 
 @Controller
@@ -74,6 +75,14 @@ public class GoodsController {
     @RequestMapping(value="/selectValidGoods")  
 	public List<Goods> selectValidGoods() {  
 		List<Goods> list=goodsService.selectValidGoods();
+	    return list;
+	}
+	
+	//根据物品编号查询全部信息-显示物品详情-联表
+	@ResponseBody  
+    @RequestMapping(value="/selectGoodsDetails")  
+	public List<GoodsAndUser> selectGoodsDetails(int goods_id) {  
+		List<GoodsAndUser> list=goodsService.selectGoodsDetails(goods_id);
 	    return list;
 	}
 }

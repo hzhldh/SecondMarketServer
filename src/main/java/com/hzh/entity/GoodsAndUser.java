@@ -1,6 +1,6 @@
 package com.hzh.entity;
 
-public class Goods {
+public class GoodsAndUser {
 	private int goods_id;
 	private String source_type;//来源类型
 	private String goods_name;
@@ -15,15 +15,11 @@ public class Goods {
 	private String old_degree;//折旧程度
 	private String goods_status;//物品状态
 	
-	private User user;//一对一关联，发布者相关信息
-	
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
+	private String username;//用户名
+	private long phone;//手机号
+	private int short_num;//短号
+	private String wechat;//微信号
+	private String head_img;//头像图
 	public int getGoods_id() {
 		return goods_id;
 	}
@@ -66,6 +62,12 @@ public class Goods {
 	public void setPopularity(int popularity) {
 		this.popularity = popularity;
 	}
+	public int getAuction_num() {
+		return auction_num;
+	}
+	public void setAuction_num(int auction_num) {
+		this.auction_num = auction_num;
+	}
 	public String getGoods_img() {
 		return goods_img;
 	}
@@ -95,31 +97,37 @@ public class Goods {
 	}
 	public void setGoods_status(String goods_status) {
 		this.goods_status = goods_status;
-	}	
-	public int getAuction_num() {
-		return auction_num;
 	}
-	public void setAuction_num(int auction_num) {
-		this.auction_num = auction_num;
+	public String getUsername() {
+		return username;
 	}
-	
-	public Goods() {
-		super();
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public Goods(String source_type, String goods_name, String publisher,
-			String description, String type, String goods_img,
-			double original_price, double second_price, String old_degree) {
-		super();
-		this.source_type = source_type;
-		this.goods_name = goods_name;
-		this.publisher = publisher;
-		this.description = description;
-		this.type = type;
-		this.goods_img = goods_img;
-		this.original_price = original_price;
-		this.second_price = second_price;
-		this.old_degree = old_degree;
+	public long getPhone() {
+		return phone;
 	}
-	
+	public void setPhone(long phone) {
+		this.phone = phone;
+	}
+	public int getShort_num() {
+		return short_num;
+	}
+	public void setShort_num(int short_num) {
+		this.short_num = short_num;
+	}
+	public String getWechat() {
+		return wechat;
+	}
+	public void setWechat(String wechat) {
+		this.wechat = wechat;
+	}
+	public String getHead_img() {
+		return head_img;
+	}
+	public void setHead_img(String head_img) {
+		this.head_img = head_img;
+	}
+    
 	
 }
