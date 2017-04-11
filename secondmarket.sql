@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2017-04-07 16:46:58
+Date: 2017-04-11 16:17:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -49,11 +49,14 @@ CREATE TABLE `goods` (
   `old_degree` varchar(50) DEFAULT '' COMMENT '新旧程度',
   `goods_status` varchar(50) DEFAULT '有效',
   PRIMARY KEY (`goods_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
+INSERT INTO `goods` VALUES ('7', '出售', 'iphone 7 Plus', 'hzh', '港版64G', '数码产品', '0', '0', 'new.jpg', '6288', '5000', '9.5成新', '有效');
+INSERT INTO `goods` VALUES ('8', '出售', 'iphone 6s', 'hzh', '国行', '数码产品', '0', '0', 'test.jpg', '5288', '4000', '9成新', '有效');
+INSERT INTO `goods` VALUES ('9', '出售', 'iphone 6s', 'hzh', '国行', '数码产品', '0', '0', 'test.jpg', '5288', '4000', '9成新', '已失效');
 
 -- ----------------------------
 -- Table structure for `order`
@@ -107,6 +110,6 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('hzh', '123', '13534886987', null, null, null);
+INSERT INTO `user` VALUES ('hzh', '123', '13534886987', '734054', '498641239', 'hzh.jpg');
 INSERT INTO `user` VALUES ('ldh', '123', '13534886987', null, null, null);
 INSERT INTO `user` VALUES ('黄大爷', '123', '13034480210', '734054', '498641239', 'test.png');
