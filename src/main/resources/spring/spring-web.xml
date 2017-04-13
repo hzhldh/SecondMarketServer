@@ -8,7 +8,7 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd
     http://www.springframework.org/schema/mvc
-    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <!-- 配置SpringMVC-主要和controller层相关 -->
     <!-- 1.开启SpringMVC注解模式 -->
     <!-- 简化配置： 
@@ -22,7 +22,7 @@
         (2)允许使用"/"做整体映射
      -->
      <mvc:default-servlet-handler/>
-
+     
      <!-- 3.配置jsp 显示ViewResolver -->
      <!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
