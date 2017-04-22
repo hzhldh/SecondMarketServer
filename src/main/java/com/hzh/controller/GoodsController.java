@@ -1,15 +1,40 @@
 package com.hzh.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.util.Date;
 import java.util.List;
+
+
+
+
+
+
+
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import sun.misc.BASE64Decoder;  
+import sun.misc.BASE64Encoder;  
+
+
+
+
+
+
+
+
 import com.hzh.entity.Goods;
 import com.hzh.entity.GoodsAndUser;
 import com.hzh.service.GoodsService;
+
 
 @Controller
 @RequestMapping("/goods")
@@ -85,4 +110,42 @@ public class GoodsController {
 		List<GoodsAndUser> list=goodsService.selectGoodsDetails(goods_id);
 	    return list;
 	}
+	
+	//测试上传图片，并存入本地
+	@ResponseBody 
+	@RequestMapping("/uploadImg")
+	public String upload(String imgData,HttpServletRequest request){	
+		//获取服务器存储图片的目录
+		String path=request.getServletContext().getRealPath("/WEB-INF/classes/img/goodsImg");
+		System.out.println(GenerateImage(imgData,path));
+		return "0";
+	}
+	
+	// base64字符串转化成图片,成功返回文件名 字符串
+    public static String GenerateImage(String imgStr,String path) { // 对字节数组字符串进行Base64解码并生成图片  
+        if (imgStr == null) // 图像数据为空  
+            return "1";  
+        BASE64Decoder decoder = new BASE64Decoder();  
+        try {  
+            // Base64解码  
+            byte[] b = decoder.decodeBuffer(imgStr);  
+            for (int i = 0; i < b.length; ++i) {  
+                if (b[i] < 0) {// 调整异常数据  
+                    b[i] += 256;  
+                }  
+            }  
+            //根据时间生成唯一图片文件名
+    		String fileName = String.format("%1$tY-%1$tm-%1$td-%1$tH%1$tM%1$tS-%1$tL",new Date())+".jpg";
+    		//拼接该文件的绝对路径,分隔符用File.separator 代替
+    	    String absolutePath=path+File.separator+fileName;
+            OutputStream out = new FileOutputStream(absolutePath);  
+            out.write(b);  
+            out.flush();  
+            out.close();  
+            return fileName;  
+        } catch (Exception e) {  
+            return "1";  
+        }  
+    }
+	
 }

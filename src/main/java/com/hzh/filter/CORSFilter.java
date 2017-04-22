@@ -16,7 +16,8 @@ public class CORSFilter implements Filter{
 	public void destroy() {
 		
 	}
-
+	
+    //解决跨域访问问题
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 	    HttpServletResponse response = (HttpServletResponse) res;
 	    response.setHeader("Access-Control-Allow-Origin", "*");
