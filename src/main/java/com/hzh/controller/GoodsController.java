@@ -18,11 +18,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sun.misc.BASE64Decoder;  
 import sun.misc.BASE64Encoder;  
+
+
 
 
 
@@ -43,8 +47,8 @@ public class GoodsController {
 	private GoodsService goodsService;
 	
 	//发布物品信息
-	@ResponseBody 
-    @RequestMapping(value="/AddGoods",produces = {"text/javascript;charset=UTF-8"})  
+	/*@ResponseBody 
+    @RequestMapping(value="/addGoods",produces = {"text/javascript;charset=UTF-8"})  
 	public String AddGoods(String source_type, String goods_name, String publisher,String description, String type, String goods_img, double original_price, double second_price, String old_degree) {
         Goods goods=new Goods(source_type, goods_name, publisher, description, type, goods_img, original_price, second_price, old_degree);
         if (goodsService.AddGoods(goods)) {
@@ -52,11 +56,17 @@ public class GoodsController {
 		} else {
 			return "物品发布失败";
 		}
+	}*/
+	@ResponseBody 
+    @RequestMapping(value="/addGoods",produces = {"text/javascript;charset=UTF-8"})  
+	public String AddGoods(@ModelAttribute Goods goods) {
+	   System.out.println(goods.toString());
+       return "0";
 	}
 	
 	//删除发布的物品
 	@ResponseBody 
-    @RequestMapping(value="/DelGoods",produces = {"text/javascript;charset=UTF-8"})  
+    @RequestMapping(value="/delGoods",produces = {"text/javascript;charset=UTF-8"})  
 	public String DelGoods(int goods_id) {
         if (goodsService.DelGoods(goods_id)) {
         	return "物品删除成功";
@@ -67,7 +77,7 @@ public class GoodsController {
     
     //修改发布的物品信息
 	@ResponseBody 
-    @RequestMapping(value="/UpdateGoods",produces = {"text/javascript;charset=UTF-8"})  
+    @RequestMapping(value="/updateGoods",produces = {"text/javascript;charset=UTF-8"})  
 	public String UpdateGoods(int goods_id,String goods_name,String description, String type, String goods_img, double original_price, double second_price, String old_degree) {
 		//先根据物品编号获取该对象
 		Goods goods=goodsService.selectGoodsById(goods_id);

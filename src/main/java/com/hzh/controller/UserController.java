@@ -10,6 +10,8 @@ import java.util.List;
 
 
 
+
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonAnyFormatVisitor;
 import com.hzh.entity.User;
 import com.hzh.service.UserService;
+
 
 
 
@@ -81,7 +84,7 @@ public class UserController {
 		
 	}
 	
-/*	//获取已登录用户个人信息
+	//获取已登录用户个人信息
 	@ResponseBody 
     @RequestMapping(value="/getLoginUser",produces = {"text/javascript;charset=UTF-8"})  
 	public String getLoginUser(HttpSession session) throws JsonProcessingException {
@@ -95,7 +98,7 @@ public class UserController {
 		}else {
 			return "1";
 		} 
-	}*/
+	}
 	
 	//后台管理-获取全部用户信息
 	@ResponseBody  

@@ -99,7 +99,6 @@
             <artifactId>jackson-mapper-asl</artifactId>
             <version>1.9.7</version>
         </dependency>
-		       
 
         <!-- 4.Spring -->
         <!-- 1)Spring核心 -->

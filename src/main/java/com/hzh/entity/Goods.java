@@ -120,6 +120,18 @@ public class Goods {
 		this.second_price = second_price;
 		this.old_degree = old_degree;
 	}
+	@Override
+	public String toString() {
+		return "Goods [goods_id=" + goods_id + ", source_type=" + source_type
+				+ ", goods_name=" + goods_name + ", publisher=" + publisher
+				+ ", description=" + description + ", type=" + type
+				+ ", popularity=" + popularity + ", auction_num=" + auction_num
+				+ ", goods_img=" + goods_img + ", original_price="
+				+ original_price + ", second_price=" + second_price
+				+ ", old_degree=" + old_degree + ", goods_status="
+				+ goods_status + ", user=" + user + "]";
+	}
+	
 	
 	
 }
