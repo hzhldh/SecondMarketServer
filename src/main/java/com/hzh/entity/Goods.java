@@ -13,6 +13,7 @@ public class Goods {
 	private double original_price;//原价
 	private double second_price;//二手价
 	private String old_degree;//折旧程度
+	private String publish_time;//发布时间
 	private String goods_status;//物品状态
 	
 	private User user;//一对一关联，发布者相关信息
@@ -90,6 +91,12 @@ public class Goods {
 	public void setOld_degree(String old_degree) {
 		this.old_degree = old_degree;
 	}
+	public String getPublish_time() {
+		return publish_time;
+	}
+	public void setPublish_time(String publish_time) {
+		this.publish_time = publish_time;
+	}
 	public String getGoods_status() {
 		return goods_status;
 	}
@@ -120,18 +127,6 @@ public class Goods {
 		this.second_price = second_price;
 		this.old_degree = old_degree;
 	}
-	@Override
-	public String toString() {
-		return "Goods [goods_id=" + goods_id + ", source_type=" + source_type
-				+ ", goods_name=" + goods_name + ", publisher=" + publisher
-				+ ", description=" + description + ", type=" + type
-				+ ", popularity=" + popularity + ", auction_num=" + auction_num
-				+ ", goods_img=" + goods_img + ", original_price="
-				+ original_price + ", second_price=" + second_price
-				+ ", old_degree=" + old_degree + ", goods_status="
-				+ goods_status + ", user=" + user + "]";
-	}
-	
 	
 	
 }

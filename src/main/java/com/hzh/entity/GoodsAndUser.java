@@ -13,6 +13,7 @@ public class GoodsAndUser {
 	private double original_price;//原价
 	private double second_price;//二手价
 	private String old_degree;//折旧程度
+	private String publish_time;//发布时间
 	private String goods_status;//物品状态
 	
 	private String username;//用户名
@@ -91,6 +92,12 @@ public class GoodsAndUser {
 	}
 	public void setOld_degree(String old_degree) {
 		this.old_degree = old_degree;
+	}	
+	public String getPublish_time() {
+		return publish_time;
+	}
+	public void setPublish_time(String publish_time) {
+		this.publish_time = publish_time;
 	}
 	public String getGoods_status() {
 		return goods_status;

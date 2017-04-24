@@ -1,8 +1,6 @@
 package com.hzh.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+
 import java.util.Date;
 import java.util.List;
 
@@ -12,19 +10,16 @@ import java.util.List;
 
 
 
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import sun.misc.BASE64Decoder;  
-import sun.misc.BASE64Encoder;  
+
 
 
 
@@ -47,20 +42,23 @@ public class GoodsController {
 	private GoodsService goodsService;
 	
 	//发布物品信息
-	/*@ResponseBody 
-    @RequestMapping(value="/addGoods",produces = {"text/javascript;charset=UTF-8"})  
-	public String AddGoods(String source_type, String goods_name, String publisher,String description, String type, String goods_img, double original_price, double second_price, String old_degree) {
-        Goods goods=new Goods(source_type, goods_name, publisher, description, type, goods_img, original_price, second_price, old_degree);
-        if (goodsService.AddGoods(goods)) {
-        	return "物品发布成功";
-		} else {
-			return "物品发布失败";
-		}
-	}*/
 	@ResponseBody 
     @RequestMapping(value="/addGoods",produces = {"text/javascript;charset=UTF-8"})  
-	public String AddGoods(@ModelAttribute Goods goods) {
-	   System.out.println(goods.toString());
+	public String AddGoods(@ModelAttribute Goods goods,HttpServletRequest request) {	
+		String publish_time = String.format("%1$tY-%1$tm-%1$td",new Date());//获取当前日期
+		goods.setPublish_time(publish_time);
+		
+		if (goods.getGoods_img()=="") {//未上传图片
+			goods.setGoods_img("no_img.jpg");	   
+		}else {
+			//获取服务器存储图片的目录
+		   String path=request.getServletContext().getRealPath("/WEB-INF/classes/img/goodsImg");
+		   String goods_img= goodsService.GenerateImage(goods.getGoods_img(),path);	  
+		   //更新goods对象中的goods_img
+		   goods.setGoods_img(goods_img);
+		}
+       goodsService.AddGoods(goods);
+	   
        return "0";
 	}
 	
@@ -95,7 +93,6 @@ public class GoodsController {
 		}
 		
 	}
-
     
     //显示自己发布的物品信息
 	@ResponseBody  
@@ -112,6 +109,7 @@ public class GoodsController {
 		List<Goods> list=goodsService.selectValidGoods();
 	    return list;
 	}
+
 	
 	//根据物品编号查询全部信息-显示物品详情-联表
 	@ResponseBody  
@@ -120,42 +118,5 @@ public class GoodsController {
 		List<GoodsAndUser> list=goodsService.selectGoodsDetails(goods_id);
 	    return list;
 	}
-	
-	//测试上传图片，并存入本地
-	@ResponseBody 
-	@RequestMapping("/uploadImg")
-	public String upload(String imgData,HttpServletRequest request){	
-		//获取服务器存储图片的目录
-		String path=request.getServletContext().getRealPath("/WEB-INF/classes/img/goodsImg");
-		System.out.println(GenerateImage(imgData,path));
-		return "0";
-	}
-	
-	// base64字符串转化成图片,成功返回文件名 字符串
-    public static String GenerateImage(String imgStr,String path) { // 对字节数组字符串进行Base64解码并生成图片  
-        if (imgStr == null) // 图像数据为空  
-            return "1";  
-        BASE64Decoder decoder = new BASE64Decoder();  
-        try {  
-            // Base64解码  
-            byte[] b = decoder.decodeBuffer(imgStr);  
-            for (int i = 0; i < b.length; ++i) {  
-                if (b[i] < 0) {// 调整异常数据  
-                    b[i] += 256;  
-                }  
-            }  
-            //根据时间生成唯一图片文件名
-    		String fileName = String.format("%1$tY-%1$tm-%1$td-%1$tH%1$tM%1$tS-%1$tL",new Date())+".jpg";
-    		//拼接该文件的绝对路径,分隔符用File.separator 代替
-    	    String absolutePath=path+File.separator+fileName;
-            OutputStream out = new FileOutputStream(absolutePath);  
-            out.write(b);  
-            out.flush();  
-            out.close();  
-            return fileName;  
-        } catch (Exception e) {  
-            return "1";  
-        }  
-    }
 	
 }

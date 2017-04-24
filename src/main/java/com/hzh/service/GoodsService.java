@@ -27,4 +27,7 @@ public interface GoodsService {
     
     //查看物品详情信息-联表
     List<GoodsAndUser> selectGoodsDetails(int goods_id);
+    
+    //base转码，图片存入本地
+    String GenerateImage(String imgStr,String path);
 }
