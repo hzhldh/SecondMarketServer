@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2017-04-11 16:17:48
+Date: 2017-04-24 15:08:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,7 +43,7 @@ CREATE TABLE `goods` (
   `type` varchar(32) DEFAULT NULL,
   `popularity` int(12) DEFAULT '0' COMMENT '人气值，即收藏数',
   `auction_num` int(12) DEFAULT '0' COMMENT '当前参与竞拍人数',
-  `goods_img` varchar(250) DEFAULT NULL,
+  `goods_img` varchar(250) DEFAULT 'no_img.jpg',
   `original_price` double(12,0) DEFAULT NULL,
   `second_price` double(12,0) DEFAULT NULL,
   `old_degree` varchar(50) DEFAULT '' COMMENT '新旧程度',
@@ -112,4 +112,6 @@ CREATE TABLE `user` (
 -- ----------------------------
 INSERT INTO `user` VALUES ('hzh', '123', '13534886987', '734054', '498641239', 'hzh.jpg');
 INSERT INTO `user` VALUES ('ldh', '123', '13534886987', null, null, null);
+INSERT INTO `user` VALUES ('或者', '123456', '13653043054', null, null, null);
+INSERT INTO `user` VALUES ('测试', '123456', '13653043055', null, null, null);
 INSERT INTO `user` VALUES ('黄大爷', '123', '13034480210', '734054', '498641239', 'test.png');
