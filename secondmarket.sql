@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2017-04-24 17:30:41
+Date: 2017-04-27 17:20:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -50,7 +50,7 @@ CREATE TABLE `goods` (
   `publish_time` varchar(50) DEFAULT NULL,
   `goods_status` varchar(50) DEFAULT '有效',
   PRIMARY KEY (`goods_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of goods
@@ -58,6 +58,7 @@ CREATE TABLE `goods` (
 INSERT INTO `goods` VALUES ('24', '出售', '魅族MX6', 'hzh', '支持快充，64G大内存，无暗病', '数码产品', '0', '0', '2017-04-24-163940-160.jpg', '2499', '1800', '9成新', '2017-04-24', '有效');
 INSERT INTO `goods` VALUES ('25', '出售', '小米Note', 'hzh', '高通801，全网通，3GB+16GB', '生活用品', '0', '0', '2017-04-24-164348-828.jpg', '1999', '999', '全新', '2017-04-24', '有效');
 INSERT INTO `goods` VALUES ('26', '出售', '苹果7', 'hzh', '64GB', '数码产品', '0', '0', '2017-04-24-172648-819.jpg', '5288', '4888', '全新', '2017-04-24', '有效');
+INSERT INTO `goods` VALUES ('27', '出售', '华为P10', 'hzh', '测试的', '数码产品', '0', '0', '2017-04-25-143216-806.jpg', '6288', '4500', '8成新', '2017-04-25', '有效');
 
 -- ----------------------------
 -- Table structure for `order`
@@ -66,12 +67,12 @@ DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `order_id` int(12) NOT NULL AUTO_INCREMENT,
   `goods_id` int(12) NOT NULL,
-  `publisher` varchar(32) DEFAULT NULL COMMENT '商品信息发布者',
+  `publisher` varchar(32) DEFAULT NULL,
   `order_people` varchar(32) DEFAULT NULL COMMENT '下单人',
   `final_price` double(12,0) DEFAULT NULL,
   `order_time` varchar(50) DEFAULT NULL,
   `order_status` varchar(50) DEFAULT '进行中',
-  `close_reason` varchar(250) NOT NULL,
+  `close_reason` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -88,11 +89,13 @@ CREATE TABLE `shopping_car` (
   `goods_id` int(12) NOT NULL,
   `username` varchar(32) NOT NULL,
   PRIMARY KEY (`shopping_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of shopping_car
 -- ----------------------------
+INSERT INTO `shopping_car` VALUES ('1', '26', 'hzh');
+INSERT INTO `shopping_car` VALUES ('2', '27', 'hzh');
 
 -- ----------------------------
 -- Table structure for `user`

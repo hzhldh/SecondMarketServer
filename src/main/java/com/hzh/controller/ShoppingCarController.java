@@ -22,9 +22,16 @@ public class ShoppingCarController {
 	//物品加入购物车
 	@ResponseBody 
     @RequestMapping(value="/addShoppingCar",produces = {"text/javascript;charset=UTF-8"})  
-	public String addShoppingCar(@ModelAttribute ShoppingCar shoppingCar,HttpServletRequest request) {	
-	   shoppingCarService.addShoppingCar(shoppingCar); 
-       return "0";
+	public String addShoppingCar(@ModelAttribute ShoppingCar shoppingCar) {	
+		//判断物品是否重复添加
+		if (shoppingCarService.selectRepeatCount(shoppingCar)>0) {
+			return "1";
+		}else if (shoppingCarService.selectSelfGoods(shoppingCar)>0) {//是否为自己发布物品
+			return "100";
+		}else {
+			shoppingCarService.addShoppingCar(shoppingCar); 
+	        return "0";
+		}
 	}
 	
 	//删除购物车的物品
@@ -32,9 +39,9 @@ public class ShoppingCarController {
     @RequestMapping(value="/delShoppingCar",produces = {"text/javascript;charset=UTF-8"})  
 	public String delShoppingCar(int shopping_id) {
         if (shoppingCarService.delShoppingCar(shopping_id)) {
-        	return "物品删除成功";
+        	return "0";
 		} else {
-			return "物品删除失败";
+			return "1";
 		}
 	}
 	

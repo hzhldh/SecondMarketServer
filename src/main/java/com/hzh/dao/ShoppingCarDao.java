@@ -14,4 +14,10 @@ public interface ShoppingCarDao {
 	//显示某用户购物车内的物品
 	List<ShoppingCar> selectCarByUsername(String username);
 	
+	//查询物品是否重复加入购物车
+	int selectRepeatCount(ShoppingCar shoppingCar);
+	
+	//查询是否物品本人添加
+	int selectSelfGoods(ShoppingCar shoppingCar);
+	
 }

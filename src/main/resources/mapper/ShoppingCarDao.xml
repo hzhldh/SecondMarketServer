@@ -11,6 +11,8 @@
             <id column="goods_id" property="goods_id"/>  
             <result column="source_type" property="source_type"/>  
             <result column="goods_name" property="goods_name"/> 
+            <result column="publisher" property="publisher"/> 
+            <result column="goods_img" property="goods_img"/> 
             <result column="second_price" property="second_price"/> 
             <result column="goods_status" property="goods_status"/> 
         </association> 
@@ -18,8 +20,18 @@
     
     <!-- 物品加入购物车 -->
     <insert id="addShoppingCar" parameterType="ShoppingCar">
-        INSERT into shopping_car(shopping_id,goods_id,username) VALUES(#{shopping_id},#{goods_id},#{username})
+        INSERT into shopping_car(goods_id,username) VALUES(#{goods_id},#{username})
     </insert>
+    
+    <!-- 判断购物车中物品是否已存在 -->
+    <select id="selectRepeatCount" parameterType="ShoppingCar" resultType="int">
+        select count(1) from shopping_car where username=#{username} and goods_id=#{goods_id}
+    </select>
+    
+    <!--查询是否物品本人添加 -->
+    <select id="selectSelfGoods" parameterType="ShoppingCar" resultType="int">
+        select count(1) from goods where publisher=#{username} and goods_id=#{goods_id}
+    </select>
     
     <!-- 删除购物车物品 -->
     <delete id="delShoppingCar">
@@ -28,6 +40,6 @@
    
     <!--显示某用户购物车内的物品-->
    <select id="selectCarByUsername" resultMap="ShoppingCar">
-        select s.shopping_id,s.goods_id,s.username,g.goods_id,g.source_type,g.goods_name,g.second_price,g.goods_status from shopping_car s,goods g where s.username=#{username} and s.goods_id=g.goods_id;
+        select s.shopping_id,s.goods_id,s.username,g.goods_id,g.source_type,g.goods_name,g.publisher,g.goods_img,g.second_price,g.goods_status from shopping_car s,goods g where s.username=#{username} and s.goods_id=g.goods_id;
     </select>
 </mapper>
