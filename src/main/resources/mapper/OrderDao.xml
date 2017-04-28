@@ -3,33 +3,70 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hzh.dao.OrderDao">
-    <!-- <resultMap id="Order" type="com.hzh.entity.Order" >
-	    <result column="shopping_id" property="shopping_id" jdbcType="INTEGER" />
+    <resultMap id="OrderMap" type="com.hzh.entity.Order" >
+	    <result column="order_id" property="order_id" jdbcType="INTEGER" />
 	    <result column="goods_id" property="goods_id" jdbcType="INTEGER" />
-	    <result column="username" property="username" jdbcType="VARCHAR" />
-	    <association property="publisher" javaType="com.hzh.entity.User">  
-            <id column="goods_id" property="goods_id"/>  
-            <result column="source_type" property="source_type"/>  
-            <result column="goods_name" property="goods_name"/> 
-            <result column="publisher" property="publisher"/> 
-            <result column="goods_img" property="goods_img"/> 
-            <result column="second_price" property="second_price"/> 
-            <result column="goods_status" property="goods_status"/> 
-        </association> 
-    </resultMap> -->
+	    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
+	    <result column="order_people" property="order_people" jdbcType="VARCHAR" />
+	    <result column="final_price" property="final_price" jdbcType="DOUBLE" />
+	    <result column="order_time" property="order_time" jdbcType="VARCHAR" />
+	    <result column="order_status" property="order_status" jdbcType="VARCHAR" />
+	    <result column="close_reason" property="close_reason" jdbcType="VARCHAR" />
+	    <association property="goods" javaType="com.hzh.entity.Goods">  
+            <id column="goods_id" property="goods_id" jdbcType="INTEGER" />
+		    <result column="source_type" property="source_type" jdbcType="VARCHAR" />
+		    <result column="goods_name" property="goods_name" jdbcType="VARCHAR" />
+		    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
+		    <result column="description" property="description" jdbcType="VARCHAR" />
+		    <result column="type" property="type" jdbcType="VARCHAR" />
+		    <result column="popularity" property="popularity" jdbcType="INTEGER" />
+		    <result column="auction_num" property="auction_num" jdbcType="INTEGER" />
+		    <result column="goods_img" property="goods_img" jdbcType="VARCHAR" />
+		    <result column="original_price" property="original_price" jdbcType="DOUBLE" />
+		    <result column="second_price" property="second_price" jdbcType="DOUBLE" />
+		    <result column="old_degree" property="old_degree" jdbcType="VARCHAR" />
+		    <result column="publish_time" property="publish_time" jdbcType="VARCHAR" />
+		    <result column="goods_status" property="goods_status" jdbcType="VARCHAR" />
+        </association>
+	    <association property="publisher_obj" javaType="com.hzh.entity.User">  
+            <id column="username" property="username"/>  
+            <result column="phone" property="phone"/> 
+            <result column="short_num" property="short_num"/> 
+            <result column="wechat" property="wechat"/> 
+            <result column="head_img" property="head_img"/>
+        </association>
+        <association property="order_obj" javaType="com.hzh.entity.User">  
+            <id column="username" property="username"/>  
+            <result column="phone" property="phone"/> 
+            <result column="short_num" property="short_num"/> 
+            <result column="wechat" property="wechat"/> 
+            <result column="head_img" property="head_img"/>
+        </association>       
+    </resultMap>
     
     <!-- 下单-增加 -->
     <insert id="addOrder" parameterType="Order">
-        INSERT into order(goods_id,publisher,order_people,final_price,order_time) VALUES(#{goods_id},#{publisher},#{order_people},#{final_price},#{order_time})
+        INSERT into orders(goods_id,publisher,order_people,final_price,order_time) VALUES(#{goods_id},#{publisher},#{order_people},#{final_price},#{order_time})
     </insert>
     
     <!-- 查询是否重复下单 -->
     <select id="selectRepeatOrder" parameterType="Order" resultType="int">
-        select count(1) from order where order_people=#{order_people} and goods_id=#{goods_id}
+        select count(1) from orders where order_people=#{order_people} and goods_id=#{goods_id}
     </select>
     
     <!-- 删除订单 -->
     <delete id="delOrder">
-        delete from order where order_id=#{order_id}
+        delete from orders where order_id=#{order_id}
     </delete>
+    
+    <!-- 查看订单详情-联三表 -->
+    <select id="selectOrderDetail" resultMap="OrderMap">
+       select o.*,g.*,p.username,p.phone,p.short_num,p.wechat,p.head_img,u.username,u.phone,u.short_num,u.wechat,u.head_img from orders o,goods g,user p,user u where o.goods_id=g.goods_id and o.order_people=p.username and o.publisher=u.username and o.order_id=#{order_id}    
+    </select>
+    
+    <!-- 查询新生成的订单编号 -->
+    <select id="selectMaxOrderId" resultType="int">
+        SELECT max(order_id) FROM orders
+    </select>
+  
 </mapper>

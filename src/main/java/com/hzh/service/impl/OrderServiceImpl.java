@@ -16,8 +16,15 @@ public class OrderServiceImpl  implements OrderServcie{
     private OrderDao orderDao;
 
 	@Transactional
-	public boolean addOrder(Order order) {
-		return orderDao.addOrder(order);
+	public int addOrder(Order order) {
+		if (orderDao.addOrder(order)) {
+			//查询新生成的订单编号
+			return orderDao.selectMaxOrderId();
+		}else {
+			return 0;
+		}
+		
+		
 	}
 
 	@Transactional
@@ -35,8 +42,8 @@ public class OrderServiceImpl  implements OrderServcie{
 		return false;
 	}
 
-	public List<Order> selectOrderDetail(int order_id) {
-		return null;
+	public Order selectOrderDetail(int order_id) {
+		return orderDao.selectOrderDetail(order_id);
 	}
 
 	public List<Order> selectOrderByPublisher(String publisher) {

@@ -5,8 +5,8 @@ import java.util.List;
 import com.hzh.entity.Order;
 
 public interface OrderServcie {
-	//下单-增加
-	boolean addOrder(Order order);
+	//下单-增加（成功返回编号，错误返回0）
+	int addOrder(Order order);
 	
 	//删除订单
 	boolean delOrder(int order_id);
@@ -18,7 +18,7 @@ public interface OrderServcie {
 	boolean closeOrder(int goods_id);
 	
 	//查看订单详情
-	List<Order> selectOrderDetail(int order_id);
+	Order selectOrderDetail(int order_id);
 	
 	//查看我收到的订单-用户名
 	List<Order> selectOrderByPublisher(String publisher);

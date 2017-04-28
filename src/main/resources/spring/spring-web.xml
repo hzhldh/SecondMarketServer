@@ -37,4 +37,5 @@
 
      <!-- 4.扫描web相关的bean -->
      <context:component-scan base-package="com.hzh.controller" />
+    
 </beans>

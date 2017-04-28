@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2017-04-27 17:20:11
+Date: 2017-04-27 20:28:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -61,10 +61,10 @@ INSERT INTO `goods` VALUES ('26', '出售', '苹果7', 'hzh', '64GB', '数码产
 INSERT INTO `goods` VALUES ('27', '出售', '华为P10', 'hzh', '测试的', '数码产品', '0', '0', '2017-04-25-143216-806.jpg', '6288', '4500', '8成新', '2017-04-25', '有效');
 
 -- ----------------------------
--- Table structure for `order`
+-- Table structure for `orders`
 -- ----------------------------
-DROP TABLE IF EXISTS `order`;
-CREATE TABLE `order` (
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders` (
   `order_id` int(12) NOT NULL AUTO_INCREMENT,
   `goods_id` int(12) NOT NULL,
   `publisher` varchar(32) DEFAULT NULL,
@@ -74,11 +74,12 @@ CREATE TABLE `order` (
   `order_status` varchar(50) DEFAULT '进行中',
   `close_reason` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of order
+-- Records of orders
 -- ----------------------------
+INSERT INTO `orders` VALUES ('1', '24', 'hzh', '黄大爷', '1000', '2017-04-27-20:27:18', '进行中', null);
 
 -- ----------------------------
 -- Table structure for `shopping_car`

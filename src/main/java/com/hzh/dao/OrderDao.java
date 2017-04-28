@@ -18,7 +18,7 @@ public interface OrderDao {
 	boolean closeOrder(int goods_id);
 	
 	//查看订单详情
-	List<Order> selectOrderDetail(int order_id);
+	Order selectOrderDetail(int order_id);
 	
 	//查看我收到的订单-用户名
 	List<Order> selectOrderByPublisher(String publisher);
@@ -31,4 +31,7 @@ public interface OrderDao {
 	
 	//查询是否重复下单
 	int selectRepeatOrder(Order order);
+	
+	//查询新生成的订单编号
+	int selectMaxOrderId();
 }

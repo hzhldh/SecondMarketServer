@@ -12,7 +12,9 @@ public class Order {
 	
 	private User publisher_obj;//发布人对象
 	
-	private User order_obj;//下单人对象
+ 	private Goods goods;//物品对象
+
+ 	private User order_obj;//下单人对象
 
 	public int getOrder_id() {
 		return order_id;
@@ -77,6 +79,16 @@ public class Order {
 	public void setClose_reason(String close_reason) {
 		this.close_reason = close_reason;
 	}
+	
+	
+
+	public User getOrder_obj() {
+		return order_obj;
+	}
+
+	public void setOrder_obj(User order_obj) {
+		this.order_obj = order_obj;
+	}
 
 	public User getPublisher_obj() {
 		return publisher_obj;
@@ -86,12 +98,13 @@ public class Order {
 		this.publisher_obj = publisher_obj;
 	}
 
-	public User getOrder_obj() {
-		return order_obj;
+	public Goods getGoods() {
+		return goods;
 	}
 
-	public void setOrder_obj(User order_obj) {
-		this.order_obj = order_obj;
+	public void setGoods(Goods goods) {
+		this.goods = goods;
 	}
+
 	
 }
