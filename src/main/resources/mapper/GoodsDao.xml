@@ -81,5 +81,25 @@
     <update id="revokeGoods">
         update goods set goods_status='失效' where goods_id=#{goods_id}
     </update>
+    
+    <!--物品收藏数+1-->
+    <update id="addCollectCount">
+        update goods set popularity=popularity+1 where goods_id=#{goods_id}
+    </update>
+    <!--物品收藏数-1-->
+    <update id="reduceCollectCount">
+        update goods set popularity=popularity-1 where goods_id=#{goods_id}
+    </update>
+    
+    <!--竞拍人数+1-->
+    <update id="addAuctionCount">
+        update goods set auction_num=auction_num+1 where goods_id=#{goods_id}
+    </update>
+    <!--竞拍人数-1-->
+    <update id="reduceAuctionCount">
+        update goods set auction_num=auction_num-1 where goods_id=#{goods_id}
+    </update>
+    
+    
   
 </mapper>

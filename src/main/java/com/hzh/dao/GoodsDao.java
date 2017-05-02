@@ -31,4 +31,12 @@ public interface GoodsDao {
     //撤销物品发布
     boolean revokeGoods(int goods_id);
     
+    //物品收藏数+1
+    boolean addCollectCount(int goods_id);
+    //物品收藏数-1
+    boolean reduceCollectCount(int goods_id);
+    //竞拍人数+1
+    boolean addAuctionCount(int goods_id);
+    //竞拍人数-1
+    boolean reduceAuctionCount(int goods_id);
 }
