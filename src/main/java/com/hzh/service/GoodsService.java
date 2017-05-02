@@ -30,4 +30,7 @@ public interface GoodsService {
     
     //base转码，图片存入本地
     String GenerateImage(String imgStr,String path);
+    
+    //撤销物品发布
+    boolean revokeGoods(int goods_id);
 }

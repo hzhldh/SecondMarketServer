@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2017-04-27 20:28:31
+Date: 2017-05-02 17:18:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -72,14 +72,14 @@ CREATE TABLE `orders` (
   `final_price` double(12,0) DEFAULT NULL,
   `order_time` varchar(50) DEFAULT NULL,
   `order_status` varchar(50) DEFAULT '进行中',
-  `close_reason` varchar(250) DEFAULT NULL,
+  `close_reason` varchar(250) DEFAULT '无',
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO `orders` VALUES ('1', '24', 'hzh', '黄大爷', '1000', '2017-04-27-20:27:18', '进行中', null);
+INSERT INTO `orders` VALUES ('7', '26', 'hzh', '黄大爷', '1000', '2017-05-02-11:26:47', '进行中', '无');
 
 -- ----------------------------
 -- Table structure for `shopping_car`
@@ -90,13 +90,11 @@ CREATE TABLE `shopping_car` (
   `goods_id` int(12) NOT NULL,
   `username` varchar(32) NOT NULL,
   PRIMARY KEY (`shopping_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of shopping_car
 -- ----------------------------
-INSERT INTO `shopping_car` VALUES ('1', '26', 'hzh');
-INSERT INTO `shopping_car` VALUES ('2', '27', 'hzh');
 
 -- ----------------------------
 -- Table structure for `user`

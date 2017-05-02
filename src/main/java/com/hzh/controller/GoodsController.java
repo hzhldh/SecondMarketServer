@@ -101,6 +101,17 @@ public class GoodsController {
 		List<Goods> list=goodsService.selectGoodsByName(username);
 	    return list;
 	}
+	
+	//撤销自己的发布物品
+	@ResponseBody  
+    @RequestMapping(value="/revokeGoods")  
+	public String revokeGoods(int goods_id) {  
+		if (goodsService.revokeGoods(goods_id)) {
+			return "0";
+		}else {
+			return "1";
+		}	    
+	}
     
     //显示全部有效物品信息
 	@ResponseBody  
@@ -109,7 +120,6 @@ public class GoodsController {
 		List<Goods> list=goodsService.selectValidGoods();
 	    return list;
 	}
-
 	
 	//根据物品编号查询全部信息-显示物品详情-联表
 	@ResponseBody  

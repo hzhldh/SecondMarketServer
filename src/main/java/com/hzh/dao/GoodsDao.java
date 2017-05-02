@@ -28,4 +28,7 @@ public interface GoodsDao {
     //查看物品详情信息-联表
     List<GoodsAndUser> selectGoodsDetails(int goods_id);
     
+    //撤销物品发布
+    boolean revokeGoods(int goods_id);
+    
 }

@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sun.misc.BASE64Decoder;
 
 import com.hzh.dao.GoodsDao;
+import com.hzh.dao.OrderDao;
 import com.hzh.entity.Goods;
 import com.hzh.entity.GoodsAndUser;
 import com.hzh.service.GoodsService;
@@ -21,6 +22,9 @@ import com.hzh.service.GoodsService;
 public class GoodsServiceImpl implements GoodsService{
 	@Autowired
     private GoodsDao goodsDao;
+	
+	@Autowired
+    private OrderDao orderDao;
 	
 	//发布商品信息
 	@Transactional
@@ -85,6 +89,18 @@ public class GoodsServiceImpl implements GoodsService{
         } catch (Exception e) {  
             return "no_img.jpg";  
         }
+	}
+
+	//撤销物品发布
+	@Transactional
+	public boolean revokeGoods(int goods_id) {
+		if (goodsDao.revokeGoods(goods_id)) {
+			//相关订单状态改为“交易关闭”，关闭原因“物品失效”
+			orderDao.closeOrderByRevoke(goods_id);
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 }

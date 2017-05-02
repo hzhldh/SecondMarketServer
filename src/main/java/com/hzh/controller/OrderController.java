@@ -1,6 +1,7 @@
 package com.hzh.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,6 +58,24 @@ public class OrderController {
 	}
 	
 	//发布者的订单列表
+	@ResponseBody 
+    @RequestMapping(value="/selectOrderByPublisher",produces = {"text/javascript;charset=UTF-8"})  
+	public String selectOrderByPublisher(String publisher) throws JsonProcessingException {
+		List<Order> list=orderServcie.selectOrderByPublisher(publisher);
+		//将对象转换为json字符串
+		ObjectMapper mapper=new ObjectMapper(); 		
+		String result=mapper.writeValueAsString(list);
+		return result;			
+	}
 	
 	//下单者的订单列表
+	@ResponseBody 
+    @RequestMapping(value="/selectOrderByOrderPeople",produces = {"text/javascript;charset=UTF-8"})  
+	public String selectOrderByOrderPeople(String order_people) throws JsonProcessingException {
+		List<Order> list=orderServcie.selectOrderByOrderPeople(order_people);
+		//将对象转换为json字符串
+		ObjectMapper mapper=new ObjectMapper(); 		
+		String result=mapper.writeValueAsString(list);
+		return result;			
+	}
 }

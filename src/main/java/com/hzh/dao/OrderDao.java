@@ -34,4 +34,7 @@ public interface OrderDao {
 	
 	//查询新生成的订单编号
 	int selectMaxOrderId();
+	
+	//物品撤销发布后，关联订单关闭
+	boolean closeOrderByRevoke(int goods_id);
 }

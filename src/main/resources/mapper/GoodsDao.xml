@@ -54,27 +54,32 @@
     
     <!-- 显示自己发布的物品信息 -->
     <select id="selectGoodsByName" resultMap="Goods">
-        select goods_id,source_type,goods_name,publisher,description,type,popularity,auction_num,goods_img,original_price,second_price,old_degree,publish_time,goods_status from goods where publisher=#{username};
+        select goods_id,source_type,goods_name,publisher,description,type,popularity,auction_num,goods_img,original_price,second_price,old_degree,publish_time,goods_status from goods where publisher=#{username}
     </select>
     
     <!-- 显示全部有效物品信息 -->
     <select id="selectValidGoods" resultMap="Goods">
-        select goods_id,source_type,goods_name,publisher,description,type,popularity,auction_num,goods_img,original_price,second_price,old_degree,publish_time,goods_status from goods where goods_status='有效';
+        select goods_id,source_type,goods_name,publisher,description,type,popularity,auction_num,goods_img,original_price,second_price,old_degree,publish_time,goods_status from goods where goods_status='有效'
     </select>
     
     <!-- 根据物品编号获取Goods属性-->
     <select id="selectGoodsById" resultMap="Goods">
-        select goods_id,source_type,goods_name,publisher,description,type,popularity,auction_num,goods_img,original_price,second_price,old_degree,publish_time,goods_status from goods where goods_id=#{goods_id};
+        select goods_id,source_type,goods_name,publisher,description,type,popularity,auction_num,goods_img,original_price,second_price,old_degree,publish_time,goods_status from goods where goods_id=#{goods_id}
     </select>
     
     <!-- 修改发布的物品信息(物品名称，描述，类型，图片，原价，二手价，新旧程度) -->
     <update id="UpdateGoods">
-        update goods set goods_name=#{goods_name},description=#{description},type=#{type},goods_img=#{goods_img},original_price=#{original_price},second_price=#{second_price},old_degree=#{old_degree} where goods_id=#{goods_id};
+        update goods set goods_name=#{goods_name},description=#{description},type=#{type},goods_img=#{goods_img},original_price=#{original_price},second_price=#{second_price},old_degree=#{old_degree} where goods_id=#{goods_id}
     </update>
     
     <!-- 查看物品详情信息-联表 -->
     <select id="selectGoodsDetails" resultMap="GoodsAndUser">
         select goods_id,source_type,goods_name,publisher,description,type,popularity,auction_num,goods_img,original_price,second_price,old_degree,publish_time,goods_status,username,phone,short_num,wechat,head_img from goods g,user u where g.publisher=u.username and goods_id=#{goods_id};
     </select>
+    
+    <!-- 撤销物品发布,即修改状态为失效 -->
+    <update id="revokeGoods">
+        update goods set goods_status='失效' where goods_id=#{goods_id}
+    </update>
   
 </mapper>

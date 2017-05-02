@@ -29,19 +29,34 @@
 		    <result column="goods_status" property="goods_status" jdbcType="VARCHAR" />
         </association>
 	    <association property="publisher_obj" javaType="com.hzh.entity.User">  
-            <id column="username" property="username"/>  
-            <result column="phone" property="phone"/> 
-            <result column="short_num" property="short_num"/> 
-            <result column="wechat" property="wechat"/> 
-            <result column="head_img" property="head_img"/>
+            <id column="p_username" property="username"/>  
+            <result column="p_phone" property="phone"/> 
+            <result column="p_short_num" property="short_num"/> 
+            <result column="p_wechat" property="wechat"/> 
         </association>
         <association property="order_obj" javaType="com.hzh.entity.User">  
             <id column="username" property="username"/>  
             <result column="phone" property="phone"/> 
             <result column="short_num" property="short_num"/> 
             <result column="wechat" property="wechat"/> 
-            <result column="head_img" property="head_img"/>
         </association>       
+    </resultMap>
+    <!--  订单列表 -->
+    <resultMap id="OrderList" type="com.hzh.entity.Order" >
+	    <result column="order_id" property="order_id" jdbcType="INTEGER" />
+	    <result column="goods_id" property="goods_id" jdbcType="INTEGER" />
+	    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
+	    <result column="order_people" property="order_people" jdbcType="VARCHAR" />
+	    <result column="final_price" property="final_price" jdbcType="DOUBLE" />
+	    <result column="order_time" property="order_time" jdbcType="VARCHAR" />
+	    <result column="order_status" property="order_status" jdbcType="VARCHAR" />
+	    <result column="close_reason" property="close_reason" jdbcType="VARCHAR" />
+	    <association property="goods" javaType="com.hzh.entity.Goods">  
+		    <result column="source_type" property="source_type" jdbcType="VARCHAR" />
+		    <result column="goods_name" property="goods_name" jdbcType="VARCHAR" />
+		    <result column="goods_img" property="goods_img" jdbcType="VARCHAR" />
+		    <result column="goods_status" property="goods_status" jdbcType="VARCHAR" />
+        </association>	   
     </resultMap>
     
     <!-- 下单-增加 -->
@@ -61,12 +76,27 @@
     
     <!-- 查看订单详情-联三表 -->
     <select id="selectOrderDetail" resultMap="OrderMap">
-       select o.*,g.*,p.username,p.phone,p.short_num,p.wechat,p.head_img,u.username,u.phone,u.short_num,u.wechat,u.head_img from orders o,goods g,user p,user u where o.goods_id=g.goods_id and o.order_people=p.username and o.publisher=u.username and o.order_id=#{order_id}    
+      select o.*,g.*,p.username as p_username,p.phone as p_phone,p.short_num as p_short_num,p.wechat as p_wechat,u.username,u.phone,u.short_num,u.wechat from orders o,goods g,user p,user u where o.goods_id=g.goods_id and o.publisher=p.username and o.order_people=u.username  and o.order_id=#{order_id}
     </select>
     
     <!-- 查询新生成的订单编号 -->
     <select id="selectMaxOrderId" resultType="int">
         SELECT max(order_id) FROM orders
     </select>
+    
+    <!-- 发布者查看订单列表 -->
+    <select id="selectOrderByPublisher" resultMap="OrderList">
+      select o.*,g.source_type, g.goods_name,g.goods_img,g.goods_status from orders o,goods g where o.goods_id=g.goods_id and o.publisher=#{publisher}
+    </select>
+    
+    <!-- 下单者查看订单列表 -->
+    <select id="selectOrderByOrderPeople" resultMap="OrderList">
+      select o.*,g.source_type, g.goods_name,g.goods_img,g.goods_status from orders o,goods g where o.goods_id=g.goods_id and o.order_people=#{order_people}
+    </select>
+    
+    <!-- 物品撤销发布后，关联订单关闭(订单状态改为“交易关闭”，关闭原因“物品失效”) -->
+    <update id="closeOrderByRevoke">
+        update orders set order_status='交易关闭',close_reason='物品失效' where goods_id=#{goods_id}
+    </update>
   
 </mapper>

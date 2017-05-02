@@ -22,9 +22,7 @@ public class OrderServiceImpl  implements OrderServcie{
 			return orderDao.selectMaxOrderId();
 		}else {
 			return 0;
-		}
-		
-		
+		}	
 	}
 
 	@Transactional
@@ -47,11 +45,11 @@ public class OrderServiceImpl  implements OrderServcie{
 	}
 
 	public List<Order> selectOrderByPublisher(String publisher) {
-		return null;
+		return orderDao.selectOrderByPublisher(publisher);
 	}
 
 	public List<Order> selectOrderByOrderPeople(String order_people) {
-		return null;
+		return orderDao.selectOrderByOrderPeople(order_people);
 	}
 
 	public int selectOrderCount(int goods_id) {
