@@ -94,5 +94,10 @@ public class OrderServiceImpl  implements OrderServcie{
 		return orderDao.selectClosedOrderByOrderPeople(order_people);
 	}
 
+	//查看某物品的竞拍情况
+	public List<Order> selectAuctionByGoodsId(int goods_id) {
+		return orderDao.selectAuctionByGoodsId(goods_id);
+	}
+
 
 }

@@ -59,6 +59,13 @@
         </association>	   
     </resultMap>
     
+    <!--  竞拍详情 -->
+    <resultMap id="AuctionList" type="com.hzh.entity.Order" >
+	    <result column="order_people" property="order_people" jdbcType="VARCHAR" />
+	    <result column="final_price" property="final_price" jdbcType="DOUBLE" />
+	    <result column="order_time" property="order_time" jdbcType="VARCHAR" />
+    </resultMap>
+    
     <!-- 下单-增加 -->
     <insert id="addOrder" parameterType="Order">
         INSERT into orders(goods_id,publisher,order_people,final_price,order_time) VALUES(#{goods_id},#{publisher},#{order_people},#{final_price},#{order_time})
@@ -123,5 +130,10 @@
     <update id="closeOrderByFinish">
         update orders set order_status='交易关闭',close_reason='已和他人达成交易' where goods_id=#{goods_id} and order_status='待处理'
     </update>
+    
+    <!-- 查看某物品的竞拍情况 -->
+    <select id="selectAuctionByGoodsId" resultMap="AuctionList">
+      select order_people,final_price,order_time from orders where goods_id=#{goods_id}
+    </select>
   
 </mapper>

@@ -40,4 +40,7 @@ public interface OrderServcie {
 	
 	//查询是否重复下单
 	int selectRepeatOrder(Order order);
+	
+	//查看某物品的竞拍情况
+	List<Order> selectAuctionByGoodsId(int goods_id);
 }

@@ -79,12 +79,20 @@ public class OrderController {
 		}
 	}
 	
+	//查看某物品的竞拍情况
+	@ResponseBody 
+    @RequestMapping(value="/selectAuctionByGoodsId",produces = {"text/javascript;charset=UTF-8"})  
+	public String selectAuctionByGoodsId(int goods_id) throws JsonProcessingException {	
+		List<Order> list=orderServcie.selectAuctionByGoodsId(goods_id);
+		ObjectMapper mapper=new ObjectMapper(); 		
+		String result=mapper.writeValueAsString(list);
+		return result;
+	}
 	//查看我收到的订单-未处理订单
 	@ResponseBody 
     @RequestMapping(value="/selectUntreatedOrderByPublisher",produces = {"text/javascript;charset=UTF-8"})  
 	public String selectUntreatedOrderByPublisher(String publisher) throws JsonProcessingException {
 		List<Order> list=orderServcie.selectUntreatedOrderByPublisher(publisher);
-		//将对象转换为json字符串
 		ObjectMapper mapper=new ObjectMapper(); 		
 		String result=mapper.writeValueAsString(list);
 		return result;			

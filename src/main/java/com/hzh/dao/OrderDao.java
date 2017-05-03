@@ -50,4 +50,6 @@ public interface OrderDao {
 	//查询新生成的订单编号
 	int selectMaxOrderId();	
 	
+	//查看某物品的竞拍情况
+	List<Order> selectAuctionByGoodsId(int goods_id);
 }
