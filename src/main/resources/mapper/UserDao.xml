@@ -41,4 +41,9 @@
    <select id="selectUserByName" resultType="User">
         select username,password,phone,short_num,wechat,head_img from user where username=#{username};
     </select>
+    
+    <!-- 修改用户密码 -->
+    <update id="updatePassword">
+        UPDATE user set password=#{password} where username=#{username}
+    </update>
 </mapper>

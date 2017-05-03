@@ -22,4 +22,7 @@ public interface UserService {
 	
 	//根据用户名查询全部信息
 	User selectUserByName(String username);
+	
+	//修改用户密码
+	boolean updatePassword(String username,String password);
 }

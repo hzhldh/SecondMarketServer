@@ -49,4 +49,10 @@ public class UserServiceImpl implements UserService{
 		return userDao.selectUserByName(username);
 	}
 
+	//修改用户密码
+	@Transactional
+	public boolean updatePassword(String username, String password) {
+		return userDao.updatePassword(username, password);
+	}
+
 }

@@ -77,9 +77,21 @@ public class UserController {
 		user.setWechat(wechat);
 		user.setHead_img(head_img);
 		if (userService.updateUser(user)) {
-			return "修改个人信息成功";
+			return "0";
 		}else {
-			return "修改失败";
+			return "1";
+		}
+		
+	}
+	
+	//修改个人密码
+	@ResponseBody 
+    @RequestMapping(value="/updatePassWord",produces = {"text/javascript;charset=UTF-8"})  
+	public String updatePassWord(String username,String password) {
+		if (userService.updatePassword(username, password)) {
+			return "0";
+		}else {
+			return "1";
 		}
 		
 	}

@@ -24,4 +24,7 @@ public interface UserDao {
 	
 	//根据用户名查询全部信息
 	User selectUserByName(String username);
+	
+	//修改用户密码
+	boolean updatePassword(@Param("username")String username,@Param("password")String password);
 }
