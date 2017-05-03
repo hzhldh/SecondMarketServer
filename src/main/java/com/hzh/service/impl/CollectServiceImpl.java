@@ -46,4 +46,9 @@ public class CollectServiceImpl implements CollectService{
 		return collectDao.selectCollectByName(username);
 	}
 
+	//查询是否已经收藏过
+	public int selectReapeatCollect(int goods_id, String username) {
+		return collectDao.selectReapeatCollect(goods_id, username);
+	}
+
 }

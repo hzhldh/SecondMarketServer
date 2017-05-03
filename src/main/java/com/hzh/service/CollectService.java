@@ -3,6 +3,9 @@ package com.hzh.service;
 import java.util.List;
 
 
+
+import org.apache.ibatis.annotations.Param;
+
 import com.hzh.entity.Collect;
 
 public interface CollectService {
@@ -14,4 +17,7 @@ public interface CollectService {
 	
 	//显示自己收藏的物品列表
 	List<Collect> selectCollectByName(String username);
+	
+	//查询是否已经收藏过
+	int selectReapeatCollect(int goods_id,String username);
 }

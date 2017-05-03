@@ -13,6 +13,9 @@ public interface CollectDao {
 	//增加物品收藏
 	boolean addCollect(@Param("goods_id")int goods_id,@Param("username")String username);
 	
+	//查询是否已经收藏过
+	int selectReapeatCollect(@Param("goods_id")int goods_id,@Param("username")String username);
+	
 	//显示自己收藏的物品列表
 	List<Collect> selectCollectByName(@Param("username")String username);
 }

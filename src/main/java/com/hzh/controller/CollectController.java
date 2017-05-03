@@ -45,5 +45,15 @@ public class CollectController {
 		List<Collect> list=collectService.selectCollectByName(username);
 	    return list;
 	}
-
+	
+	//查询是否已经收藏过
+	@ResponseBody 
+    @RequestMapping(value="/selectReapeatCollect",produces = {"text/javascript;charset=UTF-8"})  
+	public String selectReapeatCollect(int goods_id, String username) {
+        if (collectService.selectReapeatCollect(goods_id, username)>0) {
+        	return "0";
+		} else {
+			return "1";
+		}
+	}
 }

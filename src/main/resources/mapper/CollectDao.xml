@@ -36,7 +36,12 @@
     </delete>
    
    <!--显示自己收藏的物品列表-->
+   <select id="selectReapeatCollect" resultType="int">
+        select count(1) from collect where goods_id=#{goods_id} and username=#{username}
+   </select>
+    
+   <!--  查询是否已经收藏过 -->
    <select id="selectCollectByName" resultMap="CollectMap">
         select c.collect_id,c.goods_id,c.username,g.* from collect c,goods g where c.goods_id=g.goods_id and c.username=#{username};
-    </select>
+   </select>
 </mapper>
