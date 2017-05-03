@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2017-05-02 17:18:13
+Date: 2017-05-03 10:15:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -55,7 +55,7 @@ CREATE TABLE `goods` (
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
-INSERT INTO `goods` VALUES ('24', '出售', '魅族MX6', 'hzh', '支持快充，64G大内存，无暗病', '数码产品', '0', '0', '2017-04-24-163940-160.jpg', '2499', '1800', '9成新', '2017-04-24', '有效');
+INSERT INTO `goods` VALUES ('24', '出售', '魅族MX6', 'hzh', '支持快充，64G大内存，无暗病', '数码产品', '0', '0', '2017-04-24-163940-160.jpg', '2499', '1800', '9成新', '2017-04-24', '失效');
 INSERT INTO `goods` VALUES ('25', '出售', '小米Note', 'hzh', '高通801，全网通，3GB+16GB', '生活用品', '0', '0', '2017-04-24-164348-828.jpg', '1999', '999', '全新', '2017-04-24', '有效');
 INSERT INTO `goods` VALUES ('26', '出售', '苹果7', 'hzh', '64GB', '数码产品', '0', '0', '2017-04-24-172648-819.jpg', '5288', '4888', '全新', '2017-04-24', '有效');
 INSERT INTO `goods` VALUES ('27', '出售', '华为P10', 'hzh', '测试的', '数码产品', '0', '0', '2017-04-25-143216-806.jpg', '6288', '4500', '8成新', '2017-04-25', '有效');
@@ -71,7 +71,7 @@ CREATE TABLE `orders` (
   `order_people` varchar(32) DEFAULT NULL COMMENT '下单人',
   `final_price` double(12,0) DEFAULT NULL,
   `order_time` varchar(50) DEFAULT NULL,
-  `order_status` varchar(50) DEFAULT '进行中',
+  `order_status` varchar(50) DEFAULT '待处理',
   `close_reason` varchar(250) DEFAULT '无',
   PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
@@ -79,7 +79,7 @@ CREATE TABLE `orders` (
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO `orders` VALUES ('7', '26', 'hzh', '黄大爷', '1000', '2017-05-02-11:26:47', '进行中', '无');
+INSERT INTO `orders` VALUES ('7', '26', 'hzh', '黄大爷', '1000', '2017-05-02-11:26:47', '待处理', '无');
 
 -- ----------------------------
 -- Table structure for `shopping_car`

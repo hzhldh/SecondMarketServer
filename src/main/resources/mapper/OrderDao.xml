@@ -84,19 +84,44 @@
         SELECT max(order_id) FROM orders
     </select>
     
-    <!-- 发布者查看订单列表 -->
-    <select id="selectOrderByPublisher" resultMap="OrderList">
-      select o.*,g.source_type, g.goods_name,g.goods_img,g.goods_status from orders o,goods g where o.goods_id=g.goods_id and o.publisher=#{publisher}
+    <!-- 查看我收到的订单-未处理订单 -->
+    <select id="selectUntreatedOrderByPublisher" resultMap="OrderList">
+      select o.*,g.source_type, g.goods_name,g.goods_img,g.goods_status from orders o,goods g where o.goods_id=g.goods_id and o.publisher=#{publisher} and o.order_status='待处理'
     </select>
+    <!-- 查看我收到的订单-已关闭订单 -->
+    <select id="selectClosedOrderByPublisher" resultMap="OrderList">
+      select o.*,g.source_type, g.goods_name,g.goods_img,g.goods_status from orders o,goods g where o.goods_id=g.goods_id and o.publisher=#{publisher} and o.order_status='交易关闭'
+    </select>
+    <!-- 查看我收到的订单-已完成 -->
+    <select id="selectFinishedOrderByPublisher" resultMap="OrderList">
+      select o.*,g.source_type, g.goods_name,g.goods_img,g.goods_status from orders o,goods g where o.goods_id=g.goods_id and o.publisher=#{publisher} and o.order_status='达成交易'
+    </select> 
     
-    <!-- 下单者查看订单列表 -->
-    <select id="selectOrderByOrderPeople" resultMap="OrderList">
-      select o.*,g.source_type, g.goods_name,g.goods_img,g.goods_status from orders o,goods g where o.goods_id=g.goods_id and o.order_people=#{order_people}
+    <!-- 查看我下的订单-未处理订单 -->
+    <select id="selectUntreatedOrderByOrderPeople" resultMap="OrderList">
+      select o.*,g.source_type, g.goods_name,g.goods_img,g.goods_status from orders o,goods g where o.goods_id=g.goods_id and o.order_people=#{order_people} and o.order_status='待处理'
+    </select>
+    <!-- 查看我下的订单-已完成订单 -->
+    <select id="selectFinishedOrderByOrderPeople" resultMap="OrderList">
+      select o.*,g.source_type, g.goods_name,g.goods_img,g.goods_status from orders o,goods g where o.goods_id=g.goods_id and o.order_people=#{order_people} and o.order_status='达成交易'
+    </select>
+    <!-- 查看我下的订单-已关闭订单 -->
+    <select id="selectClosedOrderByOrderPeople" resultMap="OrderList">
+      select o.*,g.source_type, g.goods_name,g.goods_img,g.goods_status from orders o,goods g where o.goods_id=g.goods_id and o.order_people=#{order_people} and o.order_status='交易关闭'
     </select>
     
     <!-- 物品撤销发布后，关联订单关闭(订单状态改为“交易关闭”，关闭原因“物品失效”) -->
     <update id="closeOrderByRevoke">
         update orders set order_status='交易关闭',close_reason='物品失效' where goods_id=#{goods_id}
+    </update>
+    
+    <!-- 达成交易(订单状态改为“达成交易”) -->
+    <update id="FinishOrder">
+        update orders set order_status='达成交易' where order_id=#{order_id}
+    </update>
+    <!-- 达成交易后，其余关联订单关闭(订单状态改为“交易关闭”，关闭原因“已和他人达成交易”) -->
+    <update id="closeOrderByFinish">
+        update orders set order_status='交易关闭',close_reason='已和他人达成交易' where goods_id=#{goods_id} and order_status='待处理'
     </update>
   
 </mapper>

@@ -94,11 +94,19 @@ public class GoodsController {
 		
 	}
     
-    //显示自己发布的物品信息
+    //显示自己发布的物品信息-有效
 	@ResponseBody  
     @RequestMapping(value="/selectGoodsByName")  
 	public List<Goods> selectGoodsByName(String username) {  
 		List<Goods> list=goodsService.selectGoodsByName(username);
+	    return list;
+	}
+	
+	//显示自己失效的发布
+	@ResponseBody  
+    @RequestMapping(value="/selectInvalidGoodsByName")  
+	public List<Goods> selectInvalidGoodsByName(String username) {  
+		List<Goods> list=goodsService.selectInvalidGoodsByName(username);
 	    return list;
 	}
 	

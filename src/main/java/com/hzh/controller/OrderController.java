@@ -57,22 +57,84 @@ public class OrderController {
 		return result;			
 	}
 	
-	//发布者的订单列表
+	//撤销订单-对于下单者
 	@ResponseBody 
-    @RequestMapping(value="/selectOrderByPublisher",produces = {"text/javascript;charset=UTF-8"})  
-	public String selectOrderByPublisher(String publisher) throws JsonProcessingException {
-		List<Order> list=orderServcie.selectOrderByPublisher(publisher);
+    @RequestMapping(value="/revokeOrder",produces = {"text/javascript;charset=UTF-8"})  
+	public String revokeOrder(int order_id,int goods_id) {	
+		if (orderServcie.revokeOrder(order_id, goods_id)) {
+			return "0";
+		}else { 	
+			return "1";
+		}
+	}
+	
+	//完成订单
+	@ResponseBody 
+    @RequestMapping(value="/FinishOrder",produces = {"text/javascript;charset=UTF-8"})  
+	public String FinishOrder(int order_id,int goods_id) {	
+		if (orderServcie.FinishOrder(order_id, goods_id)) {
+			return "0";
+		}else { 	
+			return "1";
+		}
+	}
+	
+	//查看我收到的订单-未处理订单
+	@ResponseBody 
+    @RequestMapping(value="/selectUntreatedOrderByPublisher",produces = {"text/javascript;charset=UTF-8"})  
+	public String selectUntreatedOrderByPublisher(String publisher) throws JsonProcessingException {
+		List<Order> list=orderServcie.selectUntreatedOrderByPublisher(publisher);
+		//将对象转换为json字符串
+		ObjectMapper mapper=new ObjectMapper(); 		
+		String result=mapper.writeValueAsString(list);
+		return result;			
+	}
+	//查看我收到的订单-已关闭订单
+	@ResponseBody 
+    @RequestMapping(value="/selectClosedOrderByPublisher",produces = {"text/javascript;charset=UTF-8"})  
+	public String selectClosedOrderByPublisher(String publisher) throws JsonProcessingException {
+		List<Order> list=orderServcie.selectClosedOrderByPublisher(publisher);
+		//将对象转换为json字符串
+		ObjectMapper mapper=new ObjectMapper(); 		
+		String result=mapper.writeValueAsString(list);
+		return result;			
+	}
+	//查看我收到的订单-已完成订单
+	@ResponseBody 
+    @RequestMapping(value="/selectFinishedOrderByPublisher",produces = {"text/javascript;charset=UTF-8"})  
+	public String selectFinishedOrderByPublisher(String publisher) throws JsonProcessingException {
+		List<Order> list=orderServcie.selectFinishedOrderByPublisher(publisher);
 		//将对象转换为json字符串
 		ObjectMapper mapper=new ObjectMapper(); 		
 		String result=mapper.writeValueAsString(list);
 		return result;			
 	}
 	
-	//下单者的订单列表
+	//查看我下的订单-未处理订单
 	@ResponseBody 
-    @RequestMapping(value="/selectOrderByOrderPeople",produces = {"text/javascript;charset=UTF-8"})  
-	public String selectOrderByOrderPeople(String order_people) throws JsonProcessingException {
-		List<Order> list=orderServcie.selectOrderByOrderPeople(order_people);
+    @RequestMapping(value="/selectUntreatedOrderByOrderPeople",produces = {"text/javascript;charset=UTF-8"})  
+	public String selectUntreatedOrderByOrderPeople(String order_people) throws JsonProcessingException {
+		List<Order> list=orderServcie.selectUntreatedOrderByOrderPeople(order_people);
+		//将对象转换为json字符串
+		ObjectMapper mapper=new ObjectMapper(); 		
+		String result=mapper.writeValueAsString(list);
+		return result;			
+	}
+	//查看我下的订单-已完成
+	@ResponseBody 
+    @RequestMapping(value="/selectFinishedOrderByOrderPeople",produces = {"text/javascript;charset=UTF-8"})  
+	public String selectFinishedOrderByOrderPeople(String order_people) throws JsonProcessingException {
+		List<Order> list=orderServcie.selectFinishedOrderByOrderPeople(order_people);
+		//将对象转换为json字符串
+		ObjectMapper mapper=new ObjectMapper(); 		
+		String result=mapper.writeValueAsString(list);
+		return result;			
+	}
+	//查看我下的订单-关闭的订单
+	@ResponseBody 
+    @RequestMapping(value="/selectClosedOrderByOrderPeople",produces = {"text/javascript;charset=UTF-8"})  
+	public String selectClosedOrderByOrderPeople(String order_people) throws JsonProcessingException {
+		List<Order> list=orderServcie.selectClosedOrderByOrderPeople(order_people);
 		//将对象转换为json字符串
 		ObjectMapper mapper=new ObjectMapper(); 		
 		String result=mapper.writeValueAsString(list);

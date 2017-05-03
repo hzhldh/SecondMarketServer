@@ -22,6 +22,9 @@ public interface GoodsService {
     //显示自己发布的物品信息
     List<Goods> selectGoodsByName(String username);
     
+    //显示自己失效的发布
+    List<Goods> selectInvalidGoodsByName(String username);
+    
     //显示全部有效物品信息
     List<Goods> selectValidGoods();
     

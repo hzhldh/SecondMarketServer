@@ -103,4 +103,9 @@ public class GoodsServiceImpl implements GoodsService{
 		}
 	}
 
+	@Override
+	public List<Goods> selectInvalidGoodsByName(String username) {
+		return goodsDao.selectInvalidGoodsByName(username);
+	}
+
 }

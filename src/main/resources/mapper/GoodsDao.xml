@@ -52,9 +52,14 @@
         delete from goods where goods_id=#{goods_id}
     </delete>
     
-    <!-- 显示自己发布的物品信息 -->
+    <!-- 显示自己发布的物品信息-有效 -->
     <select id="selectGoodsByName" resultMap="Goods">
-        select goods_id,source_type,goods_name,publisher,description,type,popularity,auction_num,goods_img,original_price,second_price,old_degree,publish_time,goods_status from goods where publisher=#{username}
+        select goods_id,source_type,goods_name,publisher,description,type,popularity,auction_num,goods_img,original_price,second_price,old_degree,publish_time,goods_status from goods where publisher=#{username} and goods_status='有效'
+    </select>
+    
+    <!-- 显示自己失效的发布 -->
+    <select id="selectInvalidGoodsByName" resultMap="Goods">
+        select goods_id,source_type,goods_name,publisher,description,type,popularity,auction_num,goods_img,original_price,second_price,old_degree,publish_time,goods_status from goods where publisher=#{username} and goods_status='失效'
     </select>
     
     <!-- 显示全部有效物品信息 -->

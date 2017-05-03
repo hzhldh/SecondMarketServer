@@ -19,8 +19,11 @@ public interface GoodsDao {
     //根据物品编号获取goods属性
   	Goods selectGoodsById(int goods_id);
     
-    //显示自己发布的物品信息
+    //显示自己发布的物品信息-有效
     List<Goods> selectGoodsByName(String username);
+    
+    //显示自己失效的发布
+    List<Goods> selectInvalidGoodsByName(String username);
     
     //显示全部有效物品信息
     List<Goods> selectValidGoods();
