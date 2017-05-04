@@ -4,7 +4,7 @@ public class User {
 	private String username;//用户名
 	private String password;//密码
 	private long phone;//手机号
-	private int short_num;//短号
+	private String short_num;//短号
 	private String wechat;//微信号
 	private String head_img;//头像图
 	
@@ -26,10 +26,11 @@ public class User {
 	public void setPhone(long phone) {
 		this.phone = phone;
 	}
-	public int getShort_num() {
+    
+	public String getShort_num() {
 		return short_num;
 	}
-	public void setShort_num(int short_num) {
+	public void setShort_num(String short_num) {
 		this.short_num = short_num;
 	}
 	public String getWechat() {

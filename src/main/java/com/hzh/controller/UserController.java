@@ -12,16 +12,19 @@ import java.util.List;
 
 
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;		
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonAnyFormatVisitor;
+import com.hzh.entity.ShoppingCar;
 import com.hzh.entity.User;
 import com.hzh.service.UserService;
 
@@ -37,12 +40,11 @@ public class UserController {
 	//注册用户
 	@ResponseBody 
     @RequestMapping(value="/addUser",produces = {"text/javascript;charset=UTF-8"})  
-	public String addUser(String username,String password,long phone) {
+	public String addUser(@ModelAttribute User user) {
 		//先判断用户名是否重复
-		if (userService.selectUsernameCount(username)>0) {
+		if (userService.selectUsernameCount(user.getUsername())>0) {
 			return "100";
 		}else {
-			User user=new User(username, password, phone);
 			if (userService.insertUser(user)>0) {
 			    return "0";	
 			}else {
@@ -68,21 +70,16 @@ public class UserController {
 	}	
 	
 	//完善个人信息
-	@ResponseBody 
-    @RequestMapping(value="/updateUser",produces = {"text/javascript;charset=UTF-8"})  
-	public String updateUser(String username,int short_num,String wechat,String head_img) {
-		//先根据用户名获取该对象
-		User user=userService.selectUserByName(username);
-		user.setShort_num(short_num);
-		user.setWechat(wechat);
-		user.setHead_img(head_img);
-		if (userService.updateUser(user)) {
-			return "0";
-		}else {
-			return "1";
-		}
-		
-	}
+//	@ResponseBody 
+//    @RequestMapping(value="/updateUser",produces = {"text/javascript;charset=UTF-8"})  
+//	public String updateUser(@ModelAttribute User user) {
+//		if (userService.updateUser(user)) {
+//			return "0";
+//		}else {
+//			return "1";
+//		}
+//		
+//	}
 	
 	//修改个人密码
 	@ResponseBody 

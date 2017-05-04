@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2017-05-03 10:15:53
+Date: 2017-05-04 17:27:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,7 +24,7 @@ CREATE TABLE `collect` (
   `goods_id` int(12) NOT NULL,
   `username` varchar(32) NOT NULL,
   PRIMARY KEY (`collect_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of collect
@@ -55,10 +55,6 @@ CREATE TABLE `goods` (
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
-INSERT INTO `goods` VALUES ('24', '出售', '魅族MX6', 'hzh', '支持快充，64G大内存，无暗病', '数码产品', '0', '0', '2017-04-24-163940-160.jpg', '2499', '1800', '9成新', '2017-04-24', '失效');
-INSERT INTO `goods` VALUES ('25', '出售', '小米Note', 'hzh', '高通801，全网通，3GB+16GB', '生活用品', '0', '0', '2017-04-24-164348-828.jpg', '1999', '999', '全新', '2017-04-24', '有效');
-INSERT INTO `goods` VALUES ('26', '出售', '苹果7', 'hzh', '64GB', '数码产品', '0', '0', '2017-04-24-172648-819.jpg', '5288', '4888', '全新', '2017-04-24', '有效');
-INSERT INTO `goods` VALUES ('27', '出售', '华为P10', 'hzh', '测试的', '数码产品', '0', '0', '2017-04-25-143216-806.jpg', '6288', '4500', '8成新', '2017-04-25', '有效');
 
 -- ----------------------------
 -- Table structure for `orders`
@@ -79,7 +75,6 @@ CREATE TABLE `orders` (
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO `orders` VALUES ('7', '26', 'hzh', '黄大爷', '1000', '2017-05-02-11:26:47', '待处理', '无');
 
 -- ----------------------------
 -- Table structure for `shopping_car`
@@ -90,7 +85,7 @@ CREATE TABLE `shopping_car` (
   `goods_id` int(12) NOT NULL,
   `username` varchar(32) NOT NULL,
   PRIMARY KEY (`shopping_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of shopping_car
@@ -104,7 +99,7 @@ CREATE TABLE `user` (
   `username` varchar(32) NOT NULL,
   `password` varchar(32) NOT NULL,
   `phone` bigint(32) NOT NULL,
-  `short_num` int(12) DEFAULT NULL,
+  `short_num` varchar(32) DEFAULT NULL,
   `wechat` varchar(32) DEFAULT NULL,
   `head_img` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`username`)
@@ -113,8 +108,3 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('hzh', '123', '13534886987', '734054', '498641239', 'hzh.jpg');
-INSERT INTO `user` VALUES ('ldh', '123', '13534886987', null, null, null);
-INSERT INTO `user` VALUES ('或者', '123456', '13653043054', null, null, null);
-INSERT INTO `user` VALUES ('测试', '123456', '13653043055', null, null, null);
-INSERT INTO `user` VALUES ('黄大爷', '123', '13034480210', '734054', '498641239', 'test.png');

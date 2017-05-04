@@ -37,7 +37,7 @@
 	    <result column="goods_status" property="goods_status" jdbcType="VARCHAR" />
 	    <result column="username" property="username" jdbcType="VARCHAR" />
 	    <result column="phone" property="phone" jdbcType="BIGINT" />
-	    <result column="short_num" property="short_num" jdbcType="INTEGER" />
+	    <result column="short_num" property="short_num" jdbcType="VARCHAR" />
 	    <result column="wechat" property="wechat" jdbcType="VARCHAR" />
 	    <result column="head_img" property="head_img" jdbcType="VARCHAR" />
     </resultMap>
