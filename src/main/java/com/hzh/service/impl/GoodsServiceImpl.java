@@ -106,6 +106,21 @@ public class GoodsServiceImpl implements GoodsService{
 	@Override
 	public List<Goods> selectInvalidGoodsByName(String username) {
 		return goodsDao.selectInvalidGoodsByName(username);
+	}  
+
+	//根据类型查看物品列表
+	public List<Goods> selectGoodsByType(String type) {
+		return goodsDao.selectGoodsByType(type);
+	}
+
+	//根据来源查看物品列表
+	public List<Goods> selectGoodsBySource(String source_type) {
+		return goodsDao.selectGoodsBySource(source_type);
+	}
+
+	//根据搜索查看物品列表
+	public List<Goods> selectGoodsBySearch(String search) {
+		return goodsDao.selectGoodsBySearch(search);
 	}
 
 }

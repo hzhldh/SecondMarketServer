@@ -2,6 +2,8 @@ package com.hzh.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hzh.entity.Goods;
 import com.hzh.entity.GoodsAndUser;
 
@@ -42,4 +44,13 @@ public interface GoodsDao {
     boolean addAuctionCount(int goods_id);
     //竞拍人数-1
     boolean reduceAuctionCount(int goods_id);
+    
+    //根据类型查看物品列表
+    List<Goods> selectGoodsByType(String type);
+    
+    //根据来源查看物品列表
+    List<Goods> selectGoodsBySource(String source_type);
+    
+    //根据搜索查看物品列表
+    List<Goods> selectGoodsBySearch(@Param("search")String search);
 }

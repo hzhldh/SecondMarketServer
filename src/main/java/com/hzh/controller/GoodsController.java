@@ -137,4 +137,26 @@ public class GoodsController {
 	    return list;
 	}
 	
+	//根据类型查看物品列表
+	@ResponseBody  
+    @RequestMapping(value="/selectGoodsByType")  
+	public List<Goods> selectGoodsByType(String type) {  
+		List<Goods> list=goodsService.selectGoodsByType(type);
+	    return list;
+	}
+	//根据来源查看物品列表
+	@ResponseBody  
+    @RequestMapping(value="/selectGoodsBySource")  
+	public List<Goods> selectGoodsBySource(String source_type) {  
+		List<Goods> list=goodsService.selectGoodsBySource(source_type);
+	    return list;
+	}
+	//根据搜索查看物品列表
+	@ResponseBody  
+    @RequestMapping(value="/selectGoodsBySearch")  
+	public List<Goods> selectGoodsBySearch(String search) {  
+		List<Goods> list=goodsService.selectGoodsBySearch(search);
+	    return list;
+	}
+	
 }

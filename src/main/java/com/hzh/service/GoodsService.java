@@ -36,4 +36,13 @@ public interface GoodsService {
     
     //撤销物品发布
     boolean revokeGoods(int goods_id);
+    
+    //根据类型查看物品列表
+    List<Goods> selectGoodsByType(String type);
+    
+    //根据来源查看物品列表
+    List<Goods> selectGoodsBySource(String source_type);
+    
+    //根据搜索查看物品列表
+    List<Goods> selectGoodsBySearch(String search);
 }

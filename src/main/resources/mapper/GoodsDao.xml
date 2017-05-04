@@ -105,6 +105,19 @@
         update goods set auction_num=auction_num-1 where goods_id=#{goods_id}
     </update>
     
+    <!-- 根据类型查看物品列表 -->
+    <select id="selectGoodsByType" resultMap="Goods">
+        select goods_id,source_type,goods_name,publisher,description,type,popularity,auction_num,goods_img,original_price,second_price,old_degree,publish_time,goods_status from goods where goods_status='有效' and type=#{type}
+    </select>
     
+    <!-- 根据来源查看物品列表 -->
+    <select id="selectGoodsBySource" resultMap="Goods">
+        select goods_id,source_type,goods_name,publisher,description,type,popularity,auction_num,goods_img,original_price,second_price,old_degree,publish_time,goods_status from goods where goods_status='有效' and source_type=#{source_type}
+    </select>
+    
+    <!-- 根据搜索查看物品列表 -->
+    <select id="selectGoodsBySearch" resultMap="Goods">
+        select goods_id,source_type,goods_name,publisher,description,type,popularity,auction_num,goods_img,original_price,second_price,old_degree,publish_time,goods_status from goods where goods_status='有效' and goods_name LIKE '%${search}%'
+    </select>
   
 </mapper>
